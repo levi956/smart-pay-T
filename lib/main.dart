@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Smart Pay',
       debugShowCheckedModeBanner: false,
-      home: EmailVerify(),
+      home: Onboarding(),
     );
   }
 }
