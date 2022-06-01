@@ -57,6 +57,8 @@ class _OnboardingState extends State<Onboarding> {
                 ],
               ),
 
+              const SizedBox(height: 20),
+
               // expanded for pageview
               Expanded(
                 child: PageView.builder(
@@ -69,7 +71,7 @@ class _OnboardingState extends State<Onboarding> {
                   itemCount: onboardContent.length,
                   itemBuilder: (_, index) {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
                           child: Image.asset(
@@ -120,7 +122,7 @@ class _OnboardingState extends State<Onboarding> {
         color: primaryWhite,
         duration: const Duration(milliseconds: 4000),
         padding: const EdgeInsets.symmetric(horizontal: 80),
-        height: 125,
+        height: 105,
         child: Column(
           children: [
             Row(

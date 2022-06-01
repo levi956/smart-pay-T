@@ -27,115 +27,124 @@ class _SignInState extends State<SignIn> {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // back button
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // back button
 
-            const CustomBackButton(),
+              const CustomBackButton(),
 
-            const SizedBox(height: 40),
+              const SizedBox(height: 40),
 
-            // greeting text
-            Text(
-              'Hi There! 👋',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: primaryDarkBlue,
-              ),
-            ),
-            const SizedBox(height: 15),
-
-            // welcome back text
-            Text(
-              'Welcome back, Sign in to your account',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-                color: primaryTextGrey,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // text field
-            CustomTextField(
-              isHidden: false,
-              keyboardType: TextInputType.emailAddress,
-              label: 'Email',
-              onChanged: (v) {
-                setState(() {
-                  email = v.trim();
-                });
-              },
-            ),
-
-            CustomTextField(
-              isHidden: true,
-              label: 'Password',
-              onChanged: (v) {
-                setState(() {
-                  password = v.trim();
-                });
-              },
-            ),
-
-            // forget password
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Forgot Password?',
+              // greeting text
+              Text(
+                'Hi There! 👋',
                 style: TextStyle(
-                    color: primaryOrange,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // sign in button
-            CustomButton(
-              buttonTextColor: primaryWhite,
-              text: 'Sign In',
-              onPressed: () {},
-              validator: () {
-                return isValidEmailAddress(email) && password.isNotEmpty;
-              },
-            ),
-
-            const SizedBox(height: 30),
-
-            // or
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customDivider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'OR',
-                    style: TextStyle(fontSize: 14, color: primaryTextGrey),
-                  ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: primaryDarkBlue,
                 ),
-                customDivider()
-              ],
-            ),
+              ),
+              const SizedBox(height: 15),
 
-            const SizedBox(height: 10),
+              // welcome back text
+              Text(
+                'Welcome back, Sign in to your account',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                  color: primaryTextGrey,
+                ),
+              ),
 
-            //oAuthProvider
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                oAuthProvider(logoPath: 'assets/images/google.png'),
-                oAuthProvider(logoPath: 'assets/images/apple.png')
-              ],
-            ),
+              const SizedBox(height: 30),
 
-            const Spacer(),
+              // text field
+              CustomTextField(
+                isHidden: false,
+                keyboardType: TextInputType.emailAddress,
+                label: 'Email',
+                onChanged: (v) {
+                  setState(() {
+                    email = v.trim();
+                  });
+                },
+              ),
 
+              CustomTextField(
+                isHidden: true,
+                label: 'Password',
+                onChanged: (v) {
+                  setState(() {
+                    password = v.trim();
+                  });
+                },
+              ),
+
+              // forget password
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                      color: primaryOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // sign in button
+              CustomButton(
+                buttonTextColor: primaryWhite,
+                text: 'Sign In',
+                onPressed: () {},
+                validator: () {
+                  return isValidEmailAddress(email) && password.isNotEmpty;
+                },
+              ),
+
+              const SizedBox(height: 30),
+
+              // or
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  customDivider(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'OR',
+                      style: TextStyle(fontSize: 14, color: primaryTextGrey),
+                    ),
+                  ),
+                  customDivider()
+                ],
+              ),
+
+              const SizedBox(height: 10),
+
+              //oAuthProvider
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  oAuthProvider(logoPath: 'assets/images/google.png'),
+                  oAuthProvider(logoPath: 'assets/images/apple.png')
+                ],
+              ),
+
+              // const Spacer(),
+            ],
+          ),
+        ),
+      ),
+      bottomSheet: Container(
+        color: primaryWhite,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             // sign up
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

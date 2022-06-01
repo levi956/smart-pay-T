@@ -27,118 +27,127 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: primaryWhite,
       body: Padding(
         padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //back button
-            const CustomBackButton(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //back button
+              const CustomBackButton(),
 
-            const SizedBox(height: 40),
+              const SizedBox(height: 40),
 
-            // welcome to smart pay text
-            Row(
-              children: [
-                Text(
-                  'Create a ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: primaryDarkBlue,
+              // welcome to smart pay text
+              Row(
+                children: [
+                  Text(
+                    'Create a ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: primaryDarkBlue,
+                    ),
                   ),
-                ),
-                Text(
-                  'Smartpay',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: primaryOrange,
+                  Text(
+                    'Smartpay',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: primaryOrange,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Text(
-              'account ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: primaryDarkBlue,
+                ],
               ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // text field
-
-            CustomTextField(
-              isHidden: false,
-              label: 'Full name',
-              keyboardType: TextInputType.name,
-              onChanged: (v) {
-                setState(() {
-                  fullName = v.trim();
-                });
-              },
-            ),
-            CustomTextField(
-              isHidden: false,
-              label: 'Email',
-              keyboardType: TextInputType.emailAddress,
-              onChanged: (v) {
-                setState(() {
-                  email = v.trim();
-                });
-              },
-            ),
-            CustomTextField(
-              isHidden: true,
-              label: 'Password',
-              keyboardType: TextInputType.visiblePassword,
-              onChanged: (v) {
-                setState(() {
-                  password = v.trim();
-                });
-              },
-            ),
-
-            const SizedBox(height: 30),
-
-            //button
-            CustomButton(
-              text: 'Sign Up',
-              onPressed: () {},
-            ),
-
-            const SizedBox(height: 30),
-
-            // or
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customDivider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'OR',
-                    style: TextStyle(fontSize: 14, color: primaryTextGrey),
-                  ),
+              Text(
+                'account ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: primaryDarkBlue,
                 ),
-                customDivider()
-              ],
-            ),
+              ),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 20),
 
-            //oAuthProvider
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                oAuthProvider(logoPath: 'assets/images/google.png'),
-                oAuthProvider(logoPath: 'assets/images/apple.png')
-              ],
-            ),
+              // text field
 
-            const Spacer(),
+              CustomTextField(
+                isHidden: false,
+                label: 'Full name',
+                keyboardType: TextInputType.name,
+                onChanged: (v) {
+                  setState(() {
+                    fullName = v.trim();
+                  });
+                },
+              ),
+              CustomTextField(
+                isHidden: false,
+                label: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (v) {
+                  setState(() {
+                    email = v.trim();
+                  });
+                },
+              ),
+              CustomTextField(
+                isHidden: true,
+                label: 'Password',
+                keyboardType: TextInputType.visiblePassword,
+                onChanged: (v) {
+                  setState(() {
+                    password = v.trim();
+                  });
+                },
+              ),
 
+              const SizedBox(height: 30),
+
+              //button
+              CustomButton(
+                text: 'Sign Up',
+                onPressed: () {},
+              ),
+
+              const SizedBox(height: 30),
+
+              // or
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  customDivider(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'OR',
+                      style: TextStyle(fontSize: 14, color: primaryTextGrey),
+                    ),
+                  ),
+                  customDivider()
+                ],
+              ),
+
+              const SizedBox(height: 10),
+
+              //oAuthProvider
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  oAuthProvider(logoPath: 'assets/images/google.png'),
+                  oAuthProvider(logoPath: 'assets/images/apple.png')
+                ],
+              ),
+
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+      bottomSheet: Container(
+        color: primaryWhite,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             // sign up
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
