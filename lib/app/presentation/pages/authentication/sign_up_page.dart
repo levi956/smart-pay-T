@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_pay/app/presentation/helpers/auth_provider_button.dart';
 import 'package:smart_pay/app/presentation/helpers/custom_divider.dart';
-import 'package:smart_pay/app/presentation/helpers/validators.dart';
-import 'package:smart_pay/app/presentation/pages/sign_in/sign_in_page.dart';
+import 'package:smart_pay/core/utils/functions/validators.dart';
+import 'package:smart_pay/app/presentation/pages/authentication/sign_in_page.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
 import 'package:smart_pay/app/presentation/widgets/textfield.dart';
@@ -106,11 +106,12 @@ class _SignUpState extends State<SignUp> {
 
               //sign up button
               CustomButton(
+                buttonTextColor: primaryWhite,
                 text: 'Sign Up',
                 onPressed: () {},
                 validator: () {
                   return fullName.isNotEmpty &&
-                      isValidPassword(password) &&
+                      // isValidPassword(password) &&
                       isValidEmailAddress(email);
                 },
               ),
@@ -136,12 +137,15 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 10),
 
               //oAuthProvider
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  oAuthProvider(logoPath: 'assets/images/google.png'),
-                  oAuthProvider(logoPath: 'assets/images/apple.png')
-                ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    oAuthProvider(logoPath: 'assets/images/google.png'),
+                    oAuthProvider(logoPath: 'assets/images/apple.png')
+                  ],
+                ),
               ),
 
               const SizedBox(height: 40),
@@ -150,6 +154,7 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
       bottomSheet: Container(
+        padding: const EdgeInsets.only(bottom: 10),
         color: primaryWhite,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

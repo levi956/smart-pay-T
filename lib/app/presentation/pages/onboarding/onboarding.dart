@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_pay/app/domain/onboarding_model.dart';
-import 'package:smart_pay/app/presentation/pages/sign_in/sign_in_page.dart';
+import 'package:smart_pay/app/presentation/pages/authentication/sign_in_page.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
 import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
@@ -35,10 +35,13 @@ class _OnboardingState extends State<Onboarding> {
       resizeToAvoidBottomInset: false,
       backgroundColor: primaryWhite,
       body: Padding(
-        padding: const EdgeInsets.only(top: 40, right: 15, left: 15),
+        padding: const EdgeInsets.only(
+          top: 40,
+          right: 15,
+          left: 15,
+        ),
         child: Center(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // skip button
               Row(
@@ -120,8 +123,10 @@ class _OnboardingState extends State<Onboarding> {
       //indicator and button
       bottomSheet: AnimatedContainer(
         color: primaryWhite,
-        duration: const Duration(milliseconds: 4000),
-        padding: const EdgeInsets.symmetric(horizontal: 80),
+        duration: const Duration(
+          milliseconds: 4000,
+        ),
+        padding: const EdgeInsets.only(left: 25, right: 25),
         height: 105,
         child: Column(
           children: [
