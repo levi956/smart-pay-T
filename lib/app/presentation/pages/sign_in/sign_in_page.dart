@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_pay/app/presentation/helpers/auth_provider.dart';
+import 'package:smart_pay/app/presentation/helpers/auth_provider_button.dart';
 import 'package:smart_pay/app/presentation/helpers/custom_divider.dart';
-import 'package:smart_pay/app/presentation/helpers/email_validator.dart';
+import 'package:smart_pay/app/presentation/helpers/validators.dart';
 import 'package:smart_pay/app/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';

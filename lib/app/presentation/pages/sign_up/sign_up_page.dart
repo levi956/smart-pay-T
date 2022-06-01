@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_pay/app/presentation/helpers/auth_provider.dart';
+import 'package:smart_pay/app/presentation/helpers/auth_provider_button.dart';
 import 'package:smart_pay/app/presentation/helpers/custom_divider.dart';
+import 'package:smart_pay/app/presentation/helpers/validators.dart';
 import 'package:smart_pay/app/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
@@ -103,10 +104,15 @@ class _SignUpState extends State<SignUp> {
 
               const SizedBox(height: 30),
 
-              //button
+              //sign up button
               CustomButton(
                 text: 'Sign Up',
                 onPressed: () {},
+                validator: () {
+                  return fullName.isNotEmpty &&
+                      isValidPassword(password) &&
+                      isValidEmailAddress(email);
+                },
               ),
 
               const SizedBox(height: 30),
