@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_pay/app/presentation/helpers/auth_provider_button.dart';
 import 'package:smart_pay/app/presentation/helpers/custom_divider.dart';
+import 'package:smart_pay/app/presentation/pages/authentication/email_verification_page.dart';
+import 'package:smart_pay/app/services/api/authentication.dart';
 import 'package:smart_pay/core/utils/functions/validators.dart';
 import 'package:smart_pay/app/presentation/pages/authentication/sign_in_page.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
@@ -8,6 +10,9 @@ import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
 import 'package:smart_pay/app/presentation/widgets/textfield.dart';
 import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
+import 'package:smart_pay/core/utils/widgets/loader.dart';
+
+import '../../../domain/user.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -20,6 +25,8 @@ class _SignUpState extends State<SignUp> {
   String email = '';
   String fullName = '';
   String password = '';
+
+  Authentication auth = Authentication();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +115,9 @@ class _SignUpState extends State<SignUp> {
               CustomButton(
                 buttonTextColor: primaryWhite,
                 text: 'Sign Up',
-                onPressed: () {},
+                onPressed: () {
+                  sendEmailToken();
+                },
                 validator: () {
                   return fullName.isNotEmpty &&
                       // isValidPassword(password) &&
@@ -190,5 +199,19 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  Future<String> sendEmailToken() async {
+    showLoader(context);
+    var data = await auth.getToken({'email': email});
+    pop(context);
+    pushTo(
+      context,
+      EmailVerify(
+        user: User(full_name: fullName, email: email),
+        tokenResponse: data,
+      ),
+    );
+    return data;
   }
 }

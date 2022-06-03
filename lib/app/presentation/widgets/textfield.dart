@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -57,6 +58,66 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomInputOtpField extends StatelessWidget {
+  final ValueChanged<String>? onChanged;
+  const CustomInputOtpField({this.onChanged, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PinCodeTextField(
+      cursorColor: Colors.transparent,
+      keyboardType: TextInputType.number,
+      appContext: context,
+      length: 5,
+      obscureText: false,
+      animationType: AnimationType.fade,
+      pinTheme: PinTheme(
+        activeColor: primaryOrange,
+        selectedFillColor: Colors.transparent,
+        selectedColor: primaryOrange,
+        inactiveColor: greyWhitish,
+        inactiveFillColor: greyWhitish,
+        shape: PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(15),
+        fieldHeight: 56,
+        fieldWidth: 56,
+        activeFillColor: Colors.white,
+      ),
+      enableActiveFill: true,
+      onChanged: onChanged!,
+    );
+  }
+}
+
+class CustomInputPinField extends StatelessWidget {
+  final ValueChanged<String>? onChanged;
+  const CustomInputPinField({this.onChanged, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PinCodeTextField(
+      cursorColor: Colors.transparent,
+      keyboardType: TextInputType.number,
+      appContext: context,
+      length: 5,
+      obscureText: true,
+      animationType: AnimationType.none,
+      pinTheme: PinTheme(
+        activeColor: primaryOrange,
+        selectedFillColor: Colors.transparent,
+        selectedColor: primaryOrange,
+        inactiveColor: greyWhitish,
+        inactiveFillColor: greyWhitish,
+        fieldHeight: 56,
+        fieldWidth: 56,
+        activeFillColor: Colors.white,
+      ),
+      enableActiveFill: true,
+      onChanged: onChanged!,
     );
   }
 }
