@@ -6,7 +6,7 @@ class Authentication {
   final ApiBaseHelper _helper = ApiBaseHelper();
 
   final String _baseUrl = '';
-  final Map<String, String> _header = {'Accept': 'application/json'};
+  final Map<String, String> _header = {'Content-type': 'application/json'};
 
   // login a user
   // takes in email and password
@@ -19,7 +19,7 @@ class Authentication {
     return _response;
   }
 
-  Future<User> register(Map credentials) async {
+  Future<dynamic> register(Map credentials) async {
     final _response = await _helper.postC(
       url: 'https://smart-pay-mobile.herokuapp.com/api/v1/auth/register',
       headers: _header,
@@ -30,7 +30,7 @@ class Authentication {
 
   // takes in user email
   // returns token
-  Future<String> getToken(Map emailCred) async {
+  Future<dynamic> getToken(Map<String, dynamic> emailCred) async {
     final _response = await _helper.postT(
       url: 'https://smart-pay-mobile.herokuapp.com/api/v1/auth/email',
       headers: _header,

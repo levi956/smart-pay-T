@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:smart_pay/app/presentation/pages/authentication/success_auth.dart';
 import 'package:smart_pay/app/presentation/widgets/country_picker.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
+import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
+import 'package:smart_pay/core/utils/widgets/loader.dart';
 
+import '../../../domain/user.dart';
+import '../../../services/api/authentication.dart';
 import '../../widgets/back_button.dart';
 
 class SelectCountry extends StatefulWidget {
-  const SelectCountry({Key? key}) : super(key: key);
+  final User? user;
+
+  const SelectCountry({Key? key, this.user}) : super(key: key);
 
   @override
   State<SelectCountry> createState() => _SelectCountryState();
 }
 
 class _SelectCountryState extends State<SelectCountry> {
+  Authentication auth = Authentication();
   String country = 'NG';
   @override
   Widget build(BuildContext context) {
@@ -65,13 +73,34 @@ class _SelectCountryState extends State<SelectCountry> {
             CustomButton(
               text: 'Continue',
               onPressed: () {
-                print(country);
+                register();
               },
             ),
 
             const SizedBox(height: 20)
           ],
         ),
+      ),
+    );
+  }
+
+  // register here
+  register() {
+    showLoader(context);
+    var data = auth.register({
+      'full_name': widget.user!.full_name.toString(),
+      'email': widget.user!.email,
+      'country': country,
+      'password': widget.user!.password.toString(),
+      'device name': 'web',
+    });
+
+    print(data);
+    pop(context);
+    pushTo(
+      context,
+      SuccessAuth(
+        user: widget.user,
       ),
     );
   }

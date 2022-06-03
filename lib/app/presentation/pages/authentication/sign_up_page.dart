@@ -203,12 +203,13 @@ class _SignUpState extends State<SignUp> {
 
   Future<String> sendEmailToken() async {
     showLoader(context);
+    print(email);
     var data = await auth.getToken({'email': email});
     pop(context);
     pushTo(
       context,
       EmailVerify(
-        user: User(full_name: fullName, email: email),
+        user: User(full_name: fullName, email: email, password: password),
         tokenResponse: data,
       ),
     );

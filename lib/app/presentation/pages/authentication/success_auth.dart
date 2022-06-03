@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
 
 import '../../../../core/utils/style/color_constants.dart';
+import '../../../domain/user.dart';
 
 class SuccessAuth extends StatelessWidget {
-  const SuccessAuth({Key? key}) : super(key: key);
+  final User? user;
+  const SuccessAuth({Key? key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SuccessAuth extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20.0),
               child: Text(
-                'Hey {name}, your account has been successfully created 👋',
+                'Hey ${user!.full_name}, your account has been successfully created 👋',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   height: 1.5,

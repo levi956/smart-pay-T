@@ -44,6 +44,8 @@ class ApiBaseHelper {
   Future<dynamic> postT(
       {String? url, Map<String, String>? headers, Object? body}) async {
     var responseJson;
+    print(body);
+    print(jsonEncode(body));
 
     try {
       final response = await http.post(
@@ -51,6 +53,8 @@ class ApiBaseHelper {
         headers: headers,
         body: jsonEncode(body),
       );
+
+      print(response.body);
       responseJson = _returnTokenResponse(response);
     } catch (e) {
       print(e);
@@ -100,20 +104,20 @@ dynamic _returnRegisterResponse(http.Response response) {
     case 200:
 
       // original response
-      Map<String, dynamic> responseJson = jsonDecode(response.body.toString());
+      dynamic responseJson = jsonDecode(response.body);
 
       // accessing  data map in accordance to response
-      Map<String, Map> userResponse = responseJson['data'];
+      dynamic userResponse = responseJson['data'];
 
       // accessing user map in accordacne to response
-      dynamic body = userResponse['user'] as Map<String, dynamic>;
+      dynamic body = userResponse['user'];
 
       dynamic t = User.fromJson(body);
 
       return t;
 
     default:
-      throw Exception('error');
+      throw Exception('error register');
   }
 }
 
@@ -122,13 +126,14 @@ String _returnTokenResponse(http.Response response) {
     case 200:
 
       // original response
-      Map<String, dynamic> responseJson = jsonDecode(response.body.toString());
+      dynamic responseJson = jsonDecode(response.body);
 
       // accessing  data map in accordance to response
-      Map<String, Map> userResponse = responseJson['data'];
-      String data = userResponse['token'] as String;
+      dynamic userResponse = responseJson['data'];
+      dynamic data = userResponse['token'] as String;
 
       return data;
+    // break;
 
     default:
       throw Exception('error token');
@@ -140,7 +145,7 @@ bool _returnVerifyTokenResponse(http.Response response) {
     case 200:
 
       // original response
-      Map<String, dynamic> responseJson = jsonDecode(response.body.toString());
+      dynamic responseJson = jsonDecode(response.body);
 
       // accessing data map in accordance to response
       var verifyResponse = responseJson['status'];

@@ -27,3 +27,7 @@ class MyApp extends StatelessWidget {
 // onboard image not responsive not small screen
 // password validation not working well sha 
 // center onboard illustration to adapt on all screens 
+
+
+// socket exception
+// a response class to handle request
