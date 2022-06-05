@@ -8,9 +8,6 @@ import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
 import 'package:smart_pay/app/presentation/widgets/textfield.dart';
 import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
-import 'package:smart_pay/core/utils/widgets/loader.dart';
-
-import '../../../services/api/authentication.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -22,8 +19,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
-
-  Authentication auth = Authentication();
 
   @override
   Widget build(BuildContext context) {
@@ -187,8 +182,5 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  login() {
-    showLoader(context);
-    var data = auth.login({'email': email, 'password': password});
-  }
+  login() {}
 }

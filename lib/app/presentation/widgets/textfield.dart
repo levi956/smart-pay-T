@@ -28,6 +28,7 @@ class CustomTextField extends StatelessWidget {
         width: double.maxFinite,
         margin: const EdgeInsets.only(top: 10, bottom: 10),
         child: TextField(
+          autofocus: false,
           onChanged: onChanged,
           autocorrect: false,
           obscureText: isHidden,

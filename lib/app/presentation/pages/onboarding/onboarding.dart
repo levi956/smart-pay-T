@@ -74,11 +74,11 @@ class _OnboardingState extends State<Onboarding> {
                   itemCount: onboardContent.length,
                   itemBuilder: (_, index) {
                     return Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
                           child: Image.asset(
                             onboardContent[index].imagePath!,
+                            filterQuality: FilterQuality.medium,
                             width: 292,
                             height: 241.56,
                           ),

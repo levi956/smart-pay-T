@@ -1,18 +1,18 @@
 // ignore_for_file: non_constant_identifier_names
 
 class User {
-  String? full_name;
+  String? fullName;
   String? email;
   String? country;
-  String? password;
+  String? id;
 
-  User({this.full_name, this.email, this.country, this.password});
+  User({this.fullName, this.email, this.country, this.id});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        full_name: json['full_name'],
+        fullName: json['full_name'],
         email: json['email'],
-        country: json['country'],
-        password: json['password']);
+        id: json['id'],
+        country: json['country']);
   }
 }

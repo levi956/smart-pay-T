@@ -39,7 +39,7 @@ class SuccessAuth extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20.0),
               child: Text(
-                'Hey ${user!.full_name}, your account has been successfully created 👋',
+                'Hey ${user!.fullName}, your account has been successfully created 👋',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   height: 1.5,

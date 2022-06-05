@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_pay/app/presentation/helpers/auth_provider_button.dart';
 import 'package:smart_pay/app/presentation/helpers/custom_divider.dart';
 import 'package:smart_pay/app/presentation/pages/authentication/email_verification_page.dart';
-import 'package:smart_pay/app/services/api/authentication.dart';
+import 'package:smart_pay/app/services/api/auth.dart';
+import 'package:smart_pay/app/services/domain/service_response.dart';
 import 'package:smart_pay/core/utils/functions/validators.dart';
 import 'package:smart_pay/app/presentation/pages/authentication/sign_in_page.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
@@ -12,7 +13,8 @@ import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
 import 'package:smart_pay/core/utils/widgets/loader.dart';
 
-import '../../../domain/user.dart';
+import '../../../domain/register.dart';
+import '../../../services/domain/data.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _SignUpState extends State<SignUp> {
   String fullName = '';
   String password = '';
 
-  Authentication auth = Authentication();
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -203,16 +205,27 @@ class _SignUpState extends State<SignUp> {
 
   Future<String> sendEmailToken() async {
     showLoader(context);
-    print(email);
-    var data = await auth.getToken({'email': email});
+    ServiceResponse _response =
+        await auth.getEmailToken(cred: {'email': email});
     pop(context);
-    pushTo(
-      context,
-      EmailVerify(
-        user: User(full_name: fullName, email: email, password: password),
-        tokenResponse: data,
-      ),
-    );
-    return data;
+    if (_response.status) {
+      RegisterModel userCred =
+          RegisterModel(email: email, fullName: fullName, password: password);
+      pushTo(
+          context,
+          EmailVerify(
+              tokenResponse: sendEmailToken().toString(), userCred: userCred));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            _response.message!,
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+    return Data().token.toString();
   }
 }

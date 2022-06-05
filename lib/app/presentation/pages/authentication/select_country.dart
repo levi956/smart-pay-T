@@ -6,22 +6,24 @@ import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
 import 'package:smart_pay/core/utils/widgets/loader.dart';
 
-import '../../../domain/user.dart';
-import '../../../services/api/authentication.dart';
+import '../../../domain/register.dart';
+import '../../../services/api/auth.dart';
+
+import '../../../services/domain/service_response.dart';
 import '../../widgets/back_button.dart';
 
 class SelectCountry extends StatefulWidget {
-  final User? user;
+  final RegisterModel? userCred;
 
-  const SelectCountry({Key? key, this.user}) : super(key: key);
+  const SelectCountry({Key? key, this.userCred}) : super(key: key);
 
   @override
   State<SelectCountry> createState() => _SelectCountryState();
 }
 
 class _SelectCountryState extends State<SelectCountry> {
-  Authentication auth = Authentication();
   String country = 'NG';
+  Auth auth = Auth();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,9 +74,7 @@ class _SelectCountryState extends State<SelectCountry> {
 
             CustomButton(
               text: 'Continue',
-              onPressed: () {
-                register();
-              },
+              onPressed: () {},
             ),
 
             const SizedBox(height: 20)
@@ -85,23 +85,22 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
   // register here
-  register() {
+  addCountryCred() async {
     showLoader(context);
-    var data = auth.register({
-      'full_name': widget.user!.full_name.toString(),
-      'email': widget.user!.email,
+    ServiceResponse _response = await auth.register(cred: {
+      'full_name': widget.userCred!.fullName,
+      'email': widget.userCred!.email,
       'country': country,
-      'password': widget.user!.password.toString(),
-      'device name': 'web',
+      'password': widget.userCred!.password,
+      'device_name': 'web'
     });
-
-    print(data);
     pop(context);
-    pushTo(
-      context,
-      SuccessAuth(
-        user: widget.user,
-      ),
-    );
+    if (_response.status) {
+      print('here');
+      // pushTo(context, SuccessAuth());
+    } else {
+      // show error prompt
+      print('error');
+    }
   }
 }

@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:smart_pay/app/presentation/pages/authentication/select_country.dart';
 import 'package:smart_pay/app/presentation/widgets/back_button.dart';
 import 'package:smart_pay/app/presentation/widgets/custom_button.dart';
-import 'package:smart_pay/app/presentation/widgets/keypad.dart';
+
 import 'package:smart_pay/app/presentation/widgets/textfield.dart';
 import 'package:smart_pay/core/utils/navigation/navigation.dart';
 import 'package:smart_pay/core/utils/style/color_constants.dart';
 import 'package:smart_pay/core/utils/widgets/loader.dart';
 
-import '../../../domain/user.dart';
-import '../../../services/api/authentication.dart';
+import '../../../domain/register.dart';
+
+import '../../../services/api/auth.dart';
+
+import '../../../services/domain/service_response.dart';
 
 class EmailVerify extends StatefulWidget {
   final String? tokenResponse;
-  final User? user;
-  const EmailVerify({Key? key, this.tokenResponse, this.user})
+  final RegisterModel? userCred;
+
+  const EmailVerify({Key? key, this.tokenResponse, this.userCred})
       : super(key: key);
 
   @override
@@ -24,7 +28,7 @@ class EmailVerify extends StatefulWidget {
 class _EmailVerifyState extends State<EmailVerify> {
   String token = '';
 
-  Authentication auth = Authentication();
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,7 @@ class _EmailVerifyState extends State<EmailVerify> {
             //
 
             Text(
-              'We sent a code to ${widget.user?.email}.Enter it here to verify your identity',
+              'We sent a code to ${widget.userCred?.email}.Enter it here to verify your identity',
               style: TextStyle(
                 height: 1.5,
                 fontWeight: FontWeight.normal,
@@ -103,7 +107,7 @@ class _EmailVerifyState extends State<EmailVerify> {
               buttonTextColor: primaryWhite,
               text: 'Confirm',
               onPressed: () {
-                verifyEmail();
+                _verifyEmail();
               },
               validator: () {
                 return token != '';
@@ -130,22 +134,18 @@ class _EmailVerifyState extends State<EmailVerify> {
   }
 
   // call verify token here
-  verifyEmail() async {
+  _verifyEmail() async {
     showLoader(context);
-    var data = await auth.verifyToken({
-      'email': widget.user!.email.toString(),
-      'token': widget.tokenResponse
-    });
+    ServiceResponse response = await auth.verifyEmailToken(
+        cred: {'email': widget.userCred!.email, 'token': token});
     pop(context);
-    print(data);
-    if (data == true) {
-      pushTo(
-          context,
-          SelectCountry(
-            user: widget.user,
-          ));
+    if (response.status) {
+      // probably show success prompt here
+      pushTo(context, SelectCountry(userCred: widget.userCred));
     } else {
-      print('error for here');
+      String? errorMessage = response.message;
+      // show error prompt here
+      print('error sha');
     }
   }
 }
